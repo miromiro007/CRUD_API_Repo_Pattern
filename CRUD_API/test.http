@@ -1,0 +1,6 @@
+@baseUrl = https://localhost:7146
+
+### Get all items
+GET {{baseUrl}}/api/items
+Accept: application/json
+
