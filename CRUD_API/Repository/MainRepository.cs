@@ -50,22 +50,19 @@ namespace CRUD_API.Repository
             }
         }
 
-        public Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return Task.FromResult(_context.Set<T>().AsEnumerable());
+            var categories = await _context.Set<T>().ToListAsync();
+            return categories;
         }
 
-        public Task<IEnumerable<T>> GetAllAsync(params string[] includes)
+        public async Task<IEnumerable<T>> GetAllAsync(params string[] includes)
         {
             IQueryable<T> query = _context.Set<T>();
+            foreach (var include in includes)
+                query = query.Include(include);
 
-            foreach(var include in includes)
-            {
-                query= query.Include(include);
-
-            }
-
-            return Task.FromResult(query.AsEnumerable());
+            return await query.ToListAsync();
         }
         public Task<T> TfindByIdAsync(int id)
         {

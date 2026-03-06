@@ -1,52 +1,93 @@
-    using Scalar.AspNetCore;
-using Microsoft.EntityFrameworkCore;
-using CRUD_API.Repository.Base;
+using CRUD_API.data;
 using CRUD_API.Repository;
-using Newtonsoft.Json;
+using CRUD_API.Repository.Base;
+using CRUD_API.Seed;
+using CRUD_API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
+using Newtonsoft.Json;
+using Scalar.AspNetCore;
+using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
-builder.Services.AddControllers()
-    .AddNewtonsoftJson(options =>
-    {
-        // Ignore circular references
-        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-    });
-
-// Suppress automatic model validation for [ApiController] to allow partial updates (PATCH)
-builder.Services.Configure<ApiBehaviorOptions>(options =>
+// Add Swagger/OpenAPI support
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
 {
-    options.SuppressModelStateInvalidFilter = true;
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "CRUD API", Version = "v1" });
 });
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+
+builder.Services.AddControllers();
+builder.Services.AddIdentityCore<CRUD_API.Models.AppUser>(options => { })
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
+/*.AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});*/
 
 builder.Services.AddDbContext<CRUD_API.data.AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
 // Register Repository and UnitOfWork
 builder.Services.AddScoped(typeof(IRepository<>), typeof(MainRepository<>));
 builder.Services.AddScoped<IUnitWork, UnitOfWork>();
+// Enregistre le service JWT ici
+builder.Services.AddScoped<JwtService>();
+
+
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"])),
+
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
+
+
+
+
+
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "CRUD API v1");
     });
-    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
-    
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,14 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace CRUD_API.Migrations
 {
     /// <inheritdoc />
-    public partial class newValidator : Migration
+    public partial class OneToMany : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,7 +50,7 @@ namespace CRUD_API.Migrations
                 values: new object[,]
                 {
                     { 1, "Phones" },
-                    { 2, "Computer" },
+                    { 2, "Computers" },
                     { 3, "TV" }
                 });
 
@@ -62,11 +59,8 @@ namespace CRUD_API.Migrations
                 columns: new[] { "Id", "CategoryId", "CreatedDate", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Description for Item 1", "Item 1" },
-                    { 2, null, new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Description for Item 2", "Item 2" },
-                    { 3, null, new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Description for Item 3", "Item 3" },
-                    { 4, null, new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Description for Item 4", "Item 4" },
-                    { 5, null, new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Description for Item 5", "Item 5" }
+                    { 1, 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Apple smartphone", "iPhone 15" },
+                    { 2, 2, new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Laptop", "Dell XPS" }
                 });
 
             migrationBuilder.CreateIndex(

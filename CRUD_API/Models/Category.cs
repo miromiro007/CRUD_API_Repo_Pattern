@@ -12,7 +12,8 @@ namespace CRUD_API.Models
         [StringLength(100, MinimumLength = 2, ErrorMessage = "Le nom doit contenir entre 2 et 100 caractères")]
         public string Name { get; set; }
 
-    
+
+        public virtual List<Item> Items { get; set; }
     }
 }
         

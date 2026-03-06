@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRUD_API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260215204848_newValidator")]
-    partial class newValidator
+    [Migration("20260220152201_OneToMany")]
+    partial class OneToMany
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace CRUD_API.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "Computer"
+                            Name = "Computers"
                         },
                         new
                         {
@@ -93,47 +93,33 @@ namespace CRUD_API.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Description for Item 1",
-                            Name = "Item 1"
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Apple smartphone",
+                            Name = "iPhone 15"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Description for Item 2",
-                            Name = "Item 2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Description for Item 3",
-                            Name = "Item 3"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedDate = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Description for Item 4",
-                            Name = "Item 4"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedDate = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Description for Item 5",
-                            Name = "Item 5"
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Laptop",
+                            Name = "Dell XPS"
                         });
                 });
 
             modelBuilder.Entity("CRUD_API.Models.Item", b =>
                 {
                     b.HasOne("CRUD_API.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Items")
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("CRUD_API.Models.Category", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,5 +1,7 @@
-﻿using CRUD_API.Models;
+﻿using CRUD_API.DTOs;
+using CRUD_API.Models;
 using CRUD_API.Repository.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +9,7 @@ namespace CRUD_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class ItemsController : ControllerBase
     {
 
@@ -19,6 +22,7 @@ namespace CRUD_API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
 
         public async Task<IActionResult> GetAll()
         {
@@ -36,7 +40,8 @@ namespace CRUD_API.Controllers
             {
                 return NotFound();
             }
-            return Ok(item);
+            
+            return Ok(new ItemDTO(item));
         }
 
         [HttpPost]
@@ -189,10 +194,9 @@ namespace CRUD_API.Controllers
             {
                 return NotFound(new { message = "Aucun élément trouvé pour cette catégorie" });
             }
-            return Ok(items);
+            // ItemDtos can be used here to avoid circular reference issues and to control the data returned in the response
+            var itemDtos = items.Select(i => new ItemDTO(i));
+            return Ok(itemDtos);
         }
     }
-        
-
-    
 }

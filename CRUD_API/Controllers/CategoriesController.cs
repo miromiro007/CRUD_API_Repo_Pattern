@@ -1,4 +1,4 @@
-﻿ using CRUD_API.Models;
+﻿using CRUD_API.Models;
 using CRUD_API.Repository.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +16,10 @@ namespace CRUD_API.Controllers
             _unitWork = unitWork;
         }
         [HttpGet]
-        public Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var categories = _unitWork.Categories.GetAllAsync();
-            return Task.FromResult<IActionResult>(Ok(categories));
+            var categories =await _unitWork.Categories.GetAllAsync();
+            return Ok(categories);
         }
 
         [HttpPost]

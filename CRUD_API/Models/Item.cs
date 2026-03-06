@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CRUD_API.Models
 {
     public class Item
     {
-
         [Key]
         public int Id { get; set; }
 
@@ -15,16 +15,14 @@ namespace CRUD_API.Models
 
         [Required]
         public string Description { get; set; }
-            
+
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         [ForeignKey(nameof(Category))]
-        public int? CategoryId { get; set; }  
-        public Category Category { get; set; }
+        public int? CategoryId { get; set; }
 
-        //public IFormFile? image { get; set; }
-
-
-    }
+        [JsonIgnore]
+        public virtual Category? Category { get; set; }
+    }           
 }

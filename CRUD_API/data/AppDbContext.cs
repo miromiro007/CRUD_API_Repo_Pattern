@@ -1,9 +1,10 @@
 ﻿using CRUD_API.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRUD_API.data
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:IdentityDbContext<AppUser>
     {
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
@@ -12,18 +13,17 @@ namespace CRUD_API.data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Item>().HasData(
-                new Item { Id = 1, Name = "Item 1", Description = "Description for Item 1", CreatedDate = new DateTime(2026, 1, 1) },
-                new Item { Id = 2, Name = "Item 2", Description = "Description for Item 2", CreatedDate = new DateTime(2026, 1, 1) },
-                new Item { Id = 3, Name = "Item 3", Description = "Description for Item 3", CreatedDate = new DateTime(2026, 1, 1) },
-                new Item { Id = 4, Name = "Item 4", Description = "Description for Item 4", CreatedDate = new DateTime(2026, 1, 1) },
-                new Item { Id = 5, Name = "Item 5", Description = "Description for Item 5", CreatedDate = new DateTime(2026, 1, 1) }
-            );
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Phones" },
-                new Category { Id = 2, Name = "Computer" },
+                new Category { Id = 2, Name = "Computers" },
                 new Category { Id = 3, Name = "TV" }
             );
+
+            modelBuilder.Entity<Item>().HasData(
+                new Item { Id = 1, Name = "iPhone 15", Description = "Apple smartphone", CreatedDate = new DateTime(2025, 1, 1), CategoryId = 1 },
+                new Item { Id = 2, Name = "Dell XPS", Description = "Laptop", CreatedDate = new DateTime(2025, 1, 2), CategoryId = 2 }
+            );
+
             base.OnModelCreating(modelBuilder);
         }
 
