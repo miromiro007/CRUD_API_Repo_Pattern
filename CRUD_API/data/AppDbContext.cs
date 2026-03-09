@@ -13,6 +13,8 @@ namespace CRUD_API.data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" },
@@ -23,6 +25,9 @@ namespace CRUD_API.data
                 new Item { Id = 1, Name = "iPhone 15", Description = "Apple smartphone", CreatedDate = new DateTime(2025, 1, 1), CategoryId = 1 },
                 new Item { Id = 2, Name = "Dell XPS", Description = "Laptop", CreatedDate = new DateTime(2025, 1, 2), CategoryId = 2 }
             );
+
+            modelBuilder.Entity<AppUser>().HasIndex(u => u.Email).IsUnique();
+              
 
             base.OnModelCreating(modelBuilder);
         }

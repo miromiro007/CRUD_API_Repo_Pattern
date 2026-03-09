@@ -4,6 +4,7 @@ using CRUD_API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System.Security.Claims;
 
 namespace CRUD_API.Controllers
@@ -44,8 +45,14 @@ namespace CRUD_API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto dto)
         {
+
             // chercher utilisateur
             var user = await _userManager.FindByEmailAsync(dto.Email);
+            Log.Information("Tentative de connexion : {@UserAttempt}", new
+            {
+                dto.Email,
+                Password = " [MASQUÉ] "
+            });
 
             if (user == null)
                 return Unauthorized("Invalid credentials");

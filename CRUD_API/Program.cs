@@ -1,4 +1,6 @@
 using CRUD_API.data;
+using CRUD_API.Extentions;
+using CRUD_API.Logging;
 using CRUD_API.Repository;
 using CRUD_API.Repository.Base;
 using CRUD_API.Seed;
@@ -11,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Newtonsoft.Json;
 using Scalar.AspNetCore;
+using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -70,11 +73,36 @@ builder.Services.AddAuthentication(options =>
 
 
 
-
-
 builder.Services.AddAuthorization();
 
+//Appel de la méthode qu'on a créée pour configurer Serilog.
+SerilogConfiguration.ConfigureSerilog(builder);
+
+
+
+
+
 var app = builder.Build();
+app.UseSerilogRequestLogging();
+
+// --- AJOUT DU SEED ICI ---
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        Log.Information("🚀 Tentative de seeding de la base de données...");
+        await IdentitySeeder.SeedAdminUser(services);
+        Log.Information("✅ Seeding terminé avec succès.");
+    }
+    catch (Exception ex)
+    {
+        Log.Fatal(ex, "❌ Une erreur est survenue lors du seeding de la base de données.");
+    }
+}
+
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -85,11 +113,25 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "CRUD API v1");
     });
 }
+    
+
+
+
+
+//app.UseRequestLogging1(); // Utilise le middleware de logging des requêtes 1
+//app.UseApiKeyMiddleware();// Utilise le middleware de validation de l'API Key
+//app.UseExceptionHandlingMiddleware(); // Utilise le middleware de gestion des exceptions 1
+//app.UseRequestLogging(); // Utilise le middleware de logging des requêtes 2
+
+
+
+
+
+
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

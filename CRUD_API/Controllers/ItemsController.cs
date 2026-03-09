@@ -23,12 +23,13 @@ namespace CRUD_API.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-
         public async Task<IActionResult> GetAll()
         {
-            var items = await _unitWork.Items.GetAllAsync();
+            var 
+                items = await _unitWork.Items.GetAllAsync();
             return Ok(items);
         }
+
 
         // Implement other CRUD operations (Get by ID, Create, Update, Delete) similarly
         [HttpGet]

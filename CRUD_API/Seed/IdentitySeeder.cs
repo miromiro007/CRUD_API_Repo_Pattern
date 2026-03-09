@@ -1,36 +1,33 @@
 ﻿using CRUD_API.Models;
 using Microsoft.AspNetCore.Identity;
+using Serilog;
 
 namespace CRUD_API.Seed
 {
     public static class IdentitySeeder
     {
-        public static async Task SeedAdminUser(IServiceProvider serviceProvider) 
+        public static async Task SeedAdminUser(IServiceProvider serviceProvider)
         {
-            // Récupération des services Identity
             var userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            // Liste des rôles à créer
             string[] roles = new string[] { "Admin", "User" };
-
-            // Création des rôles s'ils n'existent pas
 
             foreach (var role in roles)
             {
-                if(!await roleManager.RoleExistsAsync(role))
+                if (!await roleManager.RoleExistsAsync(role))
                 {
-                  await roleManager.CreateAsync(new IdentityRole(role));
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                    // ✅ LOG STRUCTURE : On passe le nom du rôle en tant que propriété
+                    Log.Information("Rôle créé avec succès : {RoleName}", role);
                 }
             }
-            //Username 
+
             string adminUsername = "admin";
-            // Email et mot de passe de l'utilisateur admin
             string adminEmail = "admin@gmail.com";
-            // Vérification si l'utilisateur admin existe déjà
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
 
-            if (adminUser == null) 
+            if (adminUser == null)
             {
                 var admin = new AppUser
                 {
@@ -40,22 +37,31 @@ namespace CRUD_API.Seed
                     CreatedDate = DateTime.UtcNow
                 };
 
-                // Création de l'utilisateur admin avec un mot de passe sécurisé
-                string adminPassword = "Admin123!"; // Assurez-vous de choisir un mot de passe fort
-
-                // Création du compte admin avec mot de passe
-
+                string adminPassword = "Admin123!";
                 var result = await userManager.CreateAsync(admin, adminPassword);
 
-                if (!result.Succeeded)
+                if (result.Succeeded)
                 {
-                    throw new Exception($"Failed to create admin user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                    // ✅ LOG STRUCTURE : On logue l'objet admin (sans le password !) 
+                    // pour avoir ses détails en JSON
+                    Log.Information("Utilisateur Admin créé : {@AdminDetails}", new { admin.UserName, admin.Email });
+
+                    var roleResult = await userManager.AddToRoleAsync(admin, "Admin");
+                    if (roleResult.Succeeded)
+                    {
+                        Log.Information("Rôle 'Admin' assigné à l'utilisateur {Email}", adminEmail);
+                    }
                 }
-                var roleResult = await userManager.AddToRoleAsync(admin, "Admin");
-                if (!roleResult.Succeeded)
+                else
                 {
-                    throw new Exception($"Failed to assign admin role: {string.Join(", ", roleResult.Errors.Select(e => e.Description))}");
+                    // ❌ LOG D'ERREUR : On capture les erreurs d'Identity
+                    Log.Error("Échec de la création de l'Admin. Erreurs : {@Errors}", result.Errors);
                 }
+            }
+            else
+            {
+                // Log de diagnostic léger
+                Log.Debug("Le seed de l'admin a été sauté : l'utilisateur {Email} existe déjà.", adminEmail);
             }
         }
     }
