@@ -91,6 +91,10 @@ namespace CRUD_API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -182,6 +186,806 @@ namespace CRUD_API.Migrations
                             CreatedDate = new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Laptop",
                             Name = "Dell XPS"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 3",
+                            Name = "Item 3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 4",
+                            Name = "Item 4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 5",
+                            Name = "Item 5"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 6",
+                            Name = "Item 6"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 7",
+                            Name = "Item 7"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 8",
+                            Name = "Item 8"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 9",
+                            Name = "Item 9"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 10",
+                            Name = "Item 10"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 11",
+                            Name = "Item 11"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 12",
+                            Name = "Item 12"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 13",
+                            Name = "Item 13"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 14",
+                            Name = "Item 14"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 15",
+                            Name = "Item 15"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 16",
+                            Name = "Item 16"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 17",
+                            Name = "Item 17"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 18",
+                            Name = "Item 18"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 19",
+                            Name = "Item 19"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 20",
+                            Name = "Item 20"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 21",
+                            Name = "Item 21"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 1, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 22",
+                            Name = "Item 22"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 1, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 23",
+                            Name = "Item 23"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 24",
+                            Name = "Item 24"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 25",
+                            Name = "Item 25"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 1, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 26",
+                            Name = "Item 26"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 27",
+                            Name = "Item 27"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 1, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 28",
+                            Name = "Item 28"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 29",
+                            Name = "Item 29"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 30",
+                            Name = "Item 30"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 31",
+                            Name = "Item 31"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 32",
+                            Name = "Item 32"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 33",
+                            Name = "Item 33"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 34",
+                            Name = "Item 34"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 35",
+                            Name = "Item 35"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 36",
+                            Name = "Item 36"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 2, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 37",
+                            Name = "Item 37"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 2, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 38",
+                            Name = "Item 38"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 2, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 39",
+                            Name = "Item 39"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 40",
+                            Name = "Item 40"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 2, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 41",
+                            Name = "Item 41"
+                        },
+                        new
+                        {
+                            Id = 42,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 42",
+                            Name = "Item 42"
+                        },
+                        new
+                        {
+                            Id = 43,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 43",
+                            Name = "Item 43"
+                        },
+                        new
+                        {
+                            Id = 44,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 2, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 44",
+                            Name = "Item 44"
+                        },
+                        new
+                        {
+                            Id = 45,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 45",
+                            Name = "Item 45"
+                        },
+                        new
+                        {
+                            Id = 46,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 46",
+                            Name = "Item 46"
+                        },
+                        new
+                        {
+                            Id = 47,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 2, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 47",
+                            Name = "Item 47"
+                        },
+                        new
+                        {
+                            Id = 48,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 48",
+                            Name = "Item 48"
+                        },
+                        new
+                        {
+                            Id = 49,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 2, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 49",
+                            Name = "Item 49"
+                        },
+                        new
+                        {
+                            Id = 50,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 50",
+                            Name = "Item 50"
+                        },
+                        new
+                        {
+                            Id = 51,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 51",
+                            Name = "Item 51"
+                        },
+                        new
+                        {
+                            Id = 52,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 2, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 52",
+                            Name = "Item 52"
+                        },
+                        new
+                        {
+                            Id = 53,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 2, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 53",
+                            Name = "Item 53"
+                        },
+                        new
+                        {
+                            Id = 54,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 2, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 54",
+                            Name = "Item 54"
+                        },
+                        new
+                        {
+                            Id = 55,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 2, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 55",
+                            Name = "Item 55"
+                        },
+                        new
+                        {
+                            Id = 56,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 56",
+                            Name = "Item 56"
+                        },
+                        new
+                        {
+                            Id = 57,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 2, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 57",
+                            Name = "Item 57"
+                        },
+                        new
+                        {
+                            Id = 58,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 58",
+                            Name = "Item 58"
+                        },
+                        new
+                        {
+                            Id = 59,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 59",
+                            Name = "Item 59"
+                        },
+                        new
+                        {
+                            Id = 60,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 60",
+                            Name = "Item 60"
+                        },
+                        new
+                        {
+                            Id = 61,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 61",
+                            Name = "Item 61"
+                        },
+                        new
+                        {
+                            Id = 62,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 62",
+                            Name = "Item 62"
+                        },
+                        new
+                        {
+                            Id = 63,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 63",
+                            Name = "Item 63"
+                        },
+                        new
+                        {
+                            Id = 64,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 64",
+                            Name = "Item 64"
+                        },
+                        new
+                        {
+                            Id = 65,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 65",
+                            Name = "Item 65"
+                        },
+                        new
+                        {
+                            Id = 66,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 66",
+                            Name = "Item 66"
+                        },
+                        new
+                        {
+                            Id = 67,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 3, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 67",
+                            Name = "Item 67"
+                        },
+                        new
+                        {
+                            Id = 68,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 68",
+                            Name = "Item 68"
+                        },
+                        new
+                        {
+                            Id = 69,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 69",
+                            Name = "Item 69"
+                        },
+                        new
+                        {
+                            Id = 70,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 70",
+                            Name = "Item 70"
+                        },
+                        new
+                        {
+                            Id = 71,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 71",
+                            Name = "Item 71"
+                        },
+                        new
+                        {
+                            Id = 72,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 72",
+                            Name = "Item 72"
+                        },
+                        new
+                        {
+                            Id = 73,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 73",
+                            Name = "Item 73"
+                        },
+                        new
+                        {
+                            Id = 74,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 3, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 74",
+                            Name = "Item 74"
+                        },
+                        new
+                        {
+                            Id = 75,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 3, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 75",
+                            Name = "Item 75"
+                        },
+                        new
+                        {
+                            Id = 76,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 76",
+                            Name = "Item 76"
+                        },
+                        new
+                        {
+                            Id = 77,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 3, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 77",
+                            Name = "Item 77"
+                        },
+                        new
+                        {
+                            Id = 78,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 78",
+                            Name = "Item 78"
+                        },
+                        new
+                        {
+                            Id = 79,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 79",
+                            Name = "Item 79"
+                        },
+                        new
+                        {
+                            Id = 80,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 80",
+                            Name = "Item 80"
+                        },
+                        new
+                        {
+                            Id = 81,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 81",
+                            Name = "Item 81"
+                        },
+                        new
+                        {
+                            Id = 82,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 82",
+                            Name = "Item 82"
+                        },
+                        new
+                        {
+                            Id = 83,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 83",
+                            Name = "Item 83"
+                        },
+                        new
+                        {
+                            Id = 84,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 84",
+                            Name = "Item 84"
+                        },
+                        new
+                        {
+                            Id = 85,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 3, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 85",
+                            Name = "Item 85"
+                        },
+                        new
+                        {
+                            Id = 86,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 3, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 86",
+                            Name = "Item 86"
+                        },
+                        new
+                        {
+                            Id = 87,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 87",
+                            Name = "Item 87"
+                        },
+                        new
+                        {
+                            Id = 88,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 3, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 88",
+                            Name = "Item 88"
+                        },
+                        new
+                        {
+                            Id = 89,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 89",
+                            Name = "Item 89"
+                        },
+                        new
+                        {
+                            Id = 90,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 90",
+                            Name = "Item 90"
+                        },
+                        new
+                        {
+                            Id = 91,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 91",
+                            Name = "Item 91"
+                        },
+                        new
+                        {
+                            Id = 92,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 92",
+                            Name = "Item 92"
+                        },
+                        new
+                        {
+                            Id = 93,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 93",
+                            Name = "Item 93"
+                        },
+                        new
+                        {
+                            Id = 94,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 94",
+                            Name = "Item 94"
+                        },
+                        new
+                        {
+                            Id = 95,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 95",
+                            Name = "Item 95"
+                        },
+                        new
+                        {
+                            Id = 96,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 96",
+                            Name = "Item 96"
+                        },
+                        new
+                        {
+                            Id = 97,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 97",
+                            Name = "Item 97"
+                        },
+                        new
+                        {
+                            Id = 98,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 98",
+                            Name = "Item 98"
+                        },
+                        new
+                        {
+                            Id = 99,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 99",
+                            Name = "Item 99"
+                        },
+                        new
+                        {
+                            Id = 100,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 4, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 100",
+                            Name = "Item 100"
+                        },
+                        new
+                        {
+                            Id = 101,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 101",
+                            Name = "Item 101"
+                        },
+                        new
+                        {
+                            Id = 102,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Description for Item 102",
+                            Name = "Item 102"
                         });
                 });
 

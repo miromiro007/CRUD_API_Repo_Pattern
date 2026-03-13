@@ -1,9 +1,11 @@
-﻿using CRUD_API.DTOs;
+﻿using AutoMapper;
+using CRUD_API.DTOs;
 using CRUD_API.Models;
 using CRUD_API.Repository.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace CRUD_API.Controllers
 {
@@ -12,37 +14,81 @@ namespace CRUD_API.Controllers
     
     public class ItemsController : ControllerBase
     {
-
+        private readonly IMapper _mapper;
         private readonly IUnitWork _unitWork;
+        private readonly IMemoryCache _cache;
 
-        public ItemsController(IUnitWork unitWork)
+        public ItemsController(IUnitWork unitWork,IMapper mapper,IMemoryCache cache)
         {
 
             _unitWork = unitWork;
+            _mapper = mapper;
+            _cache = cache;
         }
 
-        [HttpGet]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("Avec Redis")]
+
+        public async Task<IActionResult> GetAllWithRedis()
         {
-            var 
-                items = await _unitWork.Items.GetAllAsync();
-            return Ok(items);
+            string cacheKey = "all_items";
+            List<ItemDTO> itemsDto;
+
+            if (!_cache.TryGetValue(cacheKey, out itemsDto))
+            {
+                var items = await _unitWork.Items.GetAllAsync();
+                itemsDto = _mapper.Map<List<ItemDTO>>(items);
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(180))
+                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(3600))
+                    .SetPriority(CacheItemPriority.High);
+
+                _cache.Set(cacheKey, itemsDto, cacheOptions);
+            }
+
+            return Ok(itemsDto);
+        }
+
+        [HttpGet("Sans Redis")]
+        public async Task<IActionResult> GetAllWithoutRedis()
+        {
+            var items = await _unitWork.Items.GetAllAsync();
+            var itemsDto = _mapper.Map<List<ItemDTO>>(items);
+            return Ok(itemsDto);
         }
 
 
         // Implement other CRUD operations (Get by ID, Create, Update, Delete) similarly
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("without caching")]
         public async Task<IActionResult> GetItemById(int id)
         {
             var item = await _unitWork.Items.TfindByIdAsync(id);
             if (item == null)
             {
-                return NotFound();
+                return NotFound(new { message = $"Item with ID {id} not found." });
             }
-            
-            return Ok(new ItemDTO(item));
+            return Ok(_mapper.Map<ItemDTO>(item));
+        }
+        [HttpGet("with caching")]
+        public async Task<IActionResult> GetItemByIdWithCaching(int id)
+        {
+            string cacheKey = $"item_{id}";
+            ItemDTO itemDto;
+            if (!_cache.TryGetValue(cacheKey, out itemDto))
+            {
+                var item = await _unitWork.Items.TfindByIdAsync(id);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+                itemDto = _mapper.Map<ItemDTO>(item);
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(180))
+                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(3600))
+                    .SetPriority(CacheItemPriority.High);
+                _cache.Set(cacheKey, itemDto, cacheOptions);
+            }
+            return Ok(itemDto);
         }
 
         [HttpPost]

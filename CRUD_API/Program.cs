@@ -19,6 +19,14 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Injection MemoryCache
+
+builder.Services.AddMemoryCache();
+
+// ingeciton of MappingProfile for AutoMapper
+
+builder.Services.AddAutoMapper(typeof(CRUD_API.AutoMapper.ItemProfile).Assembly);
+
 
 // Add Swagger/OpenAPI support
 builder.Services.AddEndpointsApiExplorer();
@@ -68,9 +76,6 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
-
-
-
 
 
 builder.Services.AddAuthorization();
